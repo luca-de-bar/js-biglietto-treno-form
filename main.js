@@ -78,7 +78,7 @@ Submit.addEventListener('click', function () {
     AgeFeedback.classList.remove("d-none");
   } else if (stringAge !== IntAge.toString()) {
     InputAge.classList.add("is-invalid");
-    AgeFeedback.innerText = "Inserire un'età valida senza zeri iniziali.";
+    AgeFeedback.innerText = "Inserire un'età valida";
     AgeFeedback.classList.remove("d-none");
   } else {
     InputAge.classList.remove("is-invalid");
