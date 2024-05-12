@@ -59,79 +59,81 @@ function EmailValidation(email) {
 }
 
 Submit.addEventListener('click', function () {
+  InputAge.classList.remove("is-valid", "is-invalid");
+  InputEmail.classList.remove("is-valid", "is-invalid");
 
-  InputAge.classList.remove('is-valid', 'is-invalid');
-  InputEmail.classList.remove('is-valid', 'is-invalid')
-    
-  //Validazione Age
-  const IntAge = parseInt(InputAge.value)
-  const stringAge = InputAge.value
-  const EmailFeedback = document.getElementById('EmailFeedback')
-  const AgeFeedback = document.getElementById('AgeFeedback')
+  // Validazione Age
+  const stringAge = InputAge.value.trim(); // Pulisci gli spazi bianchi all'inizio e alla fine
+  const IntAge = parseInt(stringAge);
+  const EmailFeedback = document.getElementById("EmailFeedback");
+  const AgeFeedback = document.getElementById("AgeFeedback");
 
   if (IntAge <= 0 || IntAge >= 111) {
-    InputAge.classList.add('is-invalid');
-    AgeFeedback.classList.remove('d-none');
-  } else if (stringAge.trim() === '') {
-    InputAge.classList.add('is-invalid')
-    AgeFeedback.classList.remove('d-none')
-  } else if (IntAge != stringAge) {
     InputAge.classList.add("is-invalid");
+    AgeFeedback.innerText = "L'età deve essere tra 1 e 110 anni.";
+    AgeFeedback.classList.remove("d-none");
+  } else if (stringAge === "") {
+    InputAge.classList.add("is-invalid");
+    AgeFeedback.innerText = "Il campo età non può essere vuoto.";
+    AgeFeedback.classList.remove("d-none");
+  } else if (stringAge !== IntAge.toString()) {
+    InputAge.classList.add("is-invalid");
+    AgeFeedback.innerText = "Inserire un'età valida senza zeri iniziali.";
     AgeFeedback.classList.remove("d-none");
   } else {
-    InputAge.classList.remove('is-invalid')
-    InputAge.classList.add('is-valid')
-    AgeFeedback.classList.add('d-none')
+    InputAge.classList.remove("is-invalid");
+    InputAge.classList.add("is-valid");
+    AgeFeedback.classList.add("d-none");
   }
 
   //Validazione Email
-  const Email = InputEmail.value
+  const Email = InputEmail.value;
 
-  if (Email.trim() === '') {
-    InputEmail.classList.add('is-invalid')
-    EmailFeedback.classList.remove('d-none')
+  if (Email.trim() === "") {
+    InputEmail.classList.add("is-invalid");
+    EmailFeedback.classList.remove("d-none");
   } else if (!EmailValidation(Email)) {
-    InputEmail.classList.add('is-invalid')
-    EmailFeedback.classList.remove('d-none')
+    InputEmail.classList.add("is-invalid");
+    EmailFeedback.classList.remove("d-none");
   } else {
-    InputEmail.classList.remove('is-invalid')
-    InputEmail.classList.add('is-valid')
-    EmailFeedback.classList.add('d-none')
+    InputEmail.classList.remove("is-invalid");
+    InputEmail.classList.add("is-valid");
+    EmailFeedback.classList.add("d-none");
   }
 
-    // Calcolo se valido e express attivo
-    const IntKM = parseInt(inputKM.value);
-    const ExpressPrice = (IntKM * 0.35).toFixed(2);
-    const ExpressTwenty = (ExpressPrice * 0.80).toFixed(2);
-    const ExpressForty = (ExpressPrice * 0.60).toFixed(2);
-    const basePrice = (IntKM * 0.21).toFixed(2);
-    const baseTwenty = (basePrice * 0.80).toFixed(2);
-    const baseForty = (basePrice * 0.60).toFixed(2);
-    const AgeValid = InputAge.classList.contains('is-valid');
-    const EmailValid = InputEmail.classList.contains('is-valid');
-    const CheckoutText = document.getElementById('CheckoutText');
-    
-    //Per questa const lo ammetto mi ha aiutato ChatGPT...
-    //non avevo idea di come aprire il modal solo in certe condizioni
-    const modal = new bootstrap.Modal(document.getElementById("Checkout"));
+  // Calcolo se valido e express attivo
+  const IntKM = parseInt(inputKM.value);
+  const ExpressPrice = (IntKM * 0.35).toFixed(2);
+  const ExpressTwenty = (ExpressPrice * 0.8).toFixed(2);
+  const ExpressForty = (ExpressPrice * 0.6).toFixed(2);
+  const basePrice = (IntKM * 0.21).toFixed(2);
+  const baseTwenty = (basePrice * 0.8).toFixed(2);
+  const baseForty = (basePrice * 0.6).toFixed(2);
+  const AgeValid = InputAge.classList.contains("is-valid");
+  const EmailValid = InputEmail.classList.contains("is-valid");
+  const CheckoutText = document.getElementById("CheckoutText");
 
-    if (AgeValid && EmailValid && ExpressCheckbox.checked && IntAge < 18) {
-        modal.show();
-        CheckoutText.innerText = `Grazie per aver scelto Express! Hai diritto ad uno sconto del 20%: il costo del biglietto sarà di ${ExpressTwenty}€ invece di ${ExpressPrice}€. Riceverai il biglietto digitale alla mail comunicata.`;
-    } else if (AgeValid && EmailValid && ExpressCheckbox.checked && IntAge >= 65) {
-        modal.show();
-        CheckoutText.innerText = `Grazie per aver scelto Express! Hai diritto ad uno sconto del 40%: il costo del biglietto sarà di ${ExpressForty}€ invece di ${ExpressPrice}€. Riceverai il biglietto digitale alla mail comunicata.`
-    } else if (AgeValid && EmailValid && ExpressCheckbox.checked) {
-        modal.show();
-        CheckoutText.innerText = `Grazie per aver scelto Express! Il prezzo del biglietto sarà di ${ExpressPrice}€. Riceverai il biglietto digitale alla mail comunicata.`
-    } else if (AgeValid && EmailValid && IntAge < 18) {
-        modal.show();
-        CheckoutText.innerText = `Hai diritto ad uno sconto! Il costo del biglietto sarà di ${baseTwenty}€ invece che ${basePrice}€. Riceverai il biglietto alla mail comunicata.`
-    } else if (AgeValid && EmailValid && IntAge >= 65) {
-        modal.show();
-        CheckoutText.innerText = `Hai diritto ad uno sconto! Il costo del biglietto sarà di ${baseForty}€ invece che ${basePrice}€ Riceverai il biglietto alla mail comunicata.`
-    } else if (AgeValid && EmailValid) {
-        modal.show();
-        CheckoutText.innerText = `Il costo del biglietto sarà di ${basePrice}€. Riceverai il biglietto alla mail comunicata.`
-    }
+  //Per questa const lo ammetto mi ha aiutato ChatGPT...
+  //non avevo idea di come aprire il modal solo in certe condizioni
+  const modal = new bootstrap.Modal(document.getElementById("Checkout"));
+
+  if (AgeValid && EmailValid && ExpressCheckbox.checked && IntAge < 18) {
+    modal.show();
+    CheckoutText.innerText = `Grazie per aver scelto Express! Hai diritto ad uno sconto del 20%: il costo del biglietto sarà di ${ExpressTwenty}€ invece di ${ExpressPrice}€. Riceverai il biglietto digitale alla mail comunicata.`;
+  } else if (AgeValid && EmailValid && ExpressCheckbox.checked && IntAge >= 65) {
+    modal.show();
+    CheckoutText.innerText = `Grazie per aver scelto Express! Hai diritto ad uno sconto del 40%: il costo del biglietto sarà di ${ExpressForty}€ invece di ${ExpressPrice}€. Riceverai il biglietto digitale alla mail comunicata.`;
+  } else if (AgeValid && EmailValid && ExpressCheckbox.checked) {
+    modal.show();
+    CheckoutText.innerText = `Grazie per aver scelto Express! Il prezzo del biglietto sarà di ${ExpressPrice}€. Riceverai il biglietto digitale alla mail comunicata.`;
+  } else if (AgeValid && EmailValid && IntAge < 18) {
+    modal.show();
+    CheckoutText.innerText = `Hai diritto ad uno sconto! Il costo del biglietto sarà di ${baseTwenty}€ invece che ${basePrice}€. Riceverai il biglietto alla mail comunicata.`;
+  } else if (AgeValid && EmailValid && IntAge >= 65) {
+    modal.show();
+    CheckoutText.innerText = `Hai diritto ad uno sconto! Il costo del biglietto sarà di ${baseForty}€ invece che ${basePrice}€ Riceverai il biglietto alla mail comunicata.`;
+  } else if (AgeValid && EmailValid) {
+    modal.show();
+    CheckoutText.innerText = `Il costo del biglietto sarà di ${basePrice}€. Riceverai il biglietto alla mail comunicata.`;
+  }
 })
