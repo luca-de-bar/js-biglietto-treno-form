@@ -75,6 +75,9 @@ Submit.addEventListener('click', function () {
   } else if (stringAge.trim() === '') {
     InputAge.classList.add('is-invalid')
     AgeFeedback.classList.remove('d-none')
+  } else if (IntAge != stringAge) {
+    InputAge.classList.add("is-invalid");
+    AgeFeedback.classList.remove("d-none");
   } else {
     InputAge.classList.remove('is-invalid')
     InputAge.classList.add('is-valid')
