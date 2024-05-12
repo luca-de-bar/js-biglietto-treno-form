@@ -23,3 +23,9 @@ switch(variable){
 ho testato anche scrivendo case (variable>=0) ma non funziona, ricercando ho scoperto che switch non funziona per questo genere di casistiche ed è pertanto consigliato l'utilizzo di IF.
 
 - in JS window.alert() blocca il thread in corso, ho dovuto eliminarlo siccome nei casi in cui l'input precedente era sbagliato, poi ne facevo uno giusto e premevo "Acquista" appariva il window.alert dandomi il messaggio finale, nonostante io nella schermata vedessi (per quanto i valori fossero validi) degli avvisi sulle caselle di input come se fossero errati.. ho poi capito che questo era dovuto a window.alert e non alla logica del mio JS (non avete idea di quanto ci abbia speso per capirlo.. stavo cercando un bug nel mio codice che non ci stava..)
+
+- Ho imparato che se aggiungi un modal di bootstrap e in un button aggiungi data-bs-toggle e data-bs-target compilati, il modal si aprirà indipendentemente dalla logica che tu gli vuoi applicare
+Ad esempio, vuoi che il modal venga mostrato solo se tutti i form sono corretti?? Beh devi rimuovere data-bs-toggle e data-bs-target altrimenti questa cosa non potrai farla dato che altrimenti
+il modal viene targhettato direttamente da HTML e quindi sucrlassando ogni altra logica.
+
+Mi è venuta in aiuto questa variabile : const modal = new bootstrap.Modal(document.getElementById("Checkout"));  e poi dentro gli if per checckare se era tutto valido eseguire modal.show()
