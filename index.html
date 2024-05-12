@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JS-Biglietto-Treno-Form</title>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <!-- MODAL -->
+      <div class="modal" tabindex="-1" id="Checkout">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-success">Grazie per aver scelto Trainline!</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p id="CheckoutText"></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Chiudi</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-container container-fluid vh-100 d-flex flex-column justify-content-center align-items-center text-white fw-semibold">
+        <div class="col-10 col-md-8 col-lg-6 col-xl-4">
+          <!-- LOGO SVG -->
+          <div class="icon d-flex flex-row justify-content-center align-items-center mb-4">
+            <img src="assets/trainline-logo.svg" alt="" style="width: 65.5%" />
+          </div>
+
+          <!-- MAIL + AGE FORM -->
+          <form class="w-100 w-md-50 w-lg-25" id="ticket-form">
+            <div class="d-flex flex-column gap-3 justify-content-center mb-4 mb-lg-5">
+              <label for="email">Inserisci la tua mail</label>
+              <input type="email" class="rounded-3 border-0 form-control" placeholder="test@gmail.com" id="InputEmail" />
+              <div class="invalid-feedback d-none" id="EmailFeedback">Inserisci un email valida</div>
+              <label for="Eta">Inserisci la tua Età</label>
+              <input type="number" class="rounded-3 border-0 form-control" placeholder="25" id="InputAge" />
+              <div class="invalid-feedback d-none" id="AgeFeedback">Inserisci un età valida (Età massima : 110)</div>
+            </div>
+            <!-- KM FORM -->
+            <div class="km-range">
+              <label for="km-range">Quanti KM desideri percorrere:</label>
+              <span id="current_km"></span>
+              <input type="range" value="5" min="5" max="200" step="5" class="form-range" id="input-km" />
+              <span class="fw-light text-warning d-none" id="ExpressInfo">*Fino a 500km!*</span>
+              <div class="d-flex flex-column mt-3 small-xs mt-lg-5">
+                <!-- EXPRESS -->
+                <h2>Pronto a spingerti più lontano?</h2>
+                <p class="fw-light">
+                  Il Servizio base consente viaggi fino ad un massimo di
+                  <span class="fw-bold text-success">200km</span> dalla tua stazione di partenza.<br />
+                  Linea
+                  <span class="fw-bold text-success">Express</span> ti dà la possibilità di raggiungere mete a 500km dalla tua stazione di partenza con la comodità della
+                  <span class="fw-bold text-success">prima classe</span>!<br />
+                  *il costo del biglietto aumenta a 0.35 cent per km*
+                </p>
+                <div class="express-setup mt-3 mt-lg-4">
+                  <input type="checkbox" id="ExpressCheckbox" class="bigger-checkbox" />
+                  <label for="express" class="checkbox-label">Attiva Express</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- SUBMIT -->
+            <div class="d-flex justify-content-end align-items-center mt-3 mt-lg-5 fw-bold">
+              <button type="submit" class="btn btn-success" id="submit">Acquista Biglietto</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

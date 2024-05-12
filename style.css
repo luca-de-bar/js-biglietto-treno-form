@@ -1,0 +1,37 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body
+{
+    background-color: #0c2c2a;
+}
+
+
+form
+{
+    width: 50%;
+    margin: auto;
+}
+
+
+/* bigger-checkbox for UX purposes */
+.bigger-checkbox
+{
+    transform: scale(1.4);
+    margin-right: 10px;
+}
+
+.checkbox-label
+{
+    transform: scale(1.1);
+}
+
+@media (max-width: 576px) {
+    .small-xs {
+        font-size: 0.875em;
+    }
+}
