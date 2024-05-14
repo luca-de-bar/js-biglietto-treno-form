@@ -9,33 +9,32 @@ form.addEventListener('submit', function (ev) {
 
 //Form elements
 const inputKM = document.getElementById('input-km')
-const current_km = document.getElementById('current_km')
-const InputEmail = document.getElementById('InputEmail')
-const InputAge = document.getElementById('InputAge')
-const Submit = document.getElementById('submit')
+const currentKM = document.getElementById('currentKM')
+const inputEmail = document.getElementById('inputEmail')
+const inputAge = document.getElementById('inputAge')
+const submit = document.getElementById('submit')
 
 //imposto il valore iniziale di inputKM
-current_km.innerText = inputKM.value
+currentKM.innerText = inputKM.value
 
 //Cambio il valore di KM quando scorro l'input range
 inputKM.addEventListener('input', function () {
-  current_km.innerText = inputKM.value
+  currentKM.innerText = inputKM.value
 })
 
 //Logica Express Setup
-const ExpressCheckbox = document.getElementById('ExpressCheckbox')
-const ExpressInfo = document.getElementById('ExpressInfo')
-let basePrice = (inputKM.value * 0.21).toFixed(2)
+const expressCheckbox = document.getElementById('expressCheckbox')
+const expressInfo = document.getElementById('expressInfo')
 
-ExpressCheckbox.addEventListener('change', function () {
-  switch (ExpressCheckbox.checked) {
+expressCheckbox.addEventListener('change', function () {
+  switch (expressCheckbox.checked) {
     case true:
       inputKM.min = '5'
       inputKM.max = '500'
       inputKM.step = '15'
-      current_km.innerText = inputKM.value
-      ExpressInfo.classList.remove('d-none')
-      ExpressInfo.classList.add('d-block')
+      currentKM.innerText = inputKM.value
+      expressInfo.classList.remove('d-none')
+      expressInfo.classList.add('d-block')
       break
 
     case false:
@@ -43,9 +42,9 @@ ExpressCheckbox.addEventListener('change', function () {
       inputKM.max = '200'
       inputKM.step = '5'
       inputKM.value = '5'
-      current_km.innerText = inputKM.value
-      ExpressInfo.classList.remove('d-block')
-      ExpressInfo.classList.add('d-none')
+      currentKM.innerText = inputKM.value
+      expressInfo.classList.remove('d-block')
+      expressInfo.classList.add('d-none')
       break
   }
 })
@@ -53,87 +52,101 @@ ExpressCheckbox.addEventListener('change', function () {
 //Validazione Input
 
 //La regex non è assolutamente scritta da me, però funziona!
-function EmailValidation(email) {
+function emailValidation(email) {
   const regex = /^[^\s@]+@[^\s@]+\.(it|com|net|org|edu)$/
   return regex.test(email)
 }
 
-Submit.addEventListener('click', function () {
-  InputAge.classList.remove("is-valid", "is-invalid");
-  InputEmail.classList.remove("is-valid", "is-invalid");
+submit.addEventListener('click', function () {
+  inputAge.classList.remove("is-valid", "is-invalid");
+  inputEmail.classList.remove("is-valid", "is-invalid");
 
   // Validazione Age
-  const stringAge = InputAge.value.trim(); // Pulisci gli spazi bianchi all'inizio e alla fine
-  const IntAge = parseInt(stringAge);
-  const EmailFeedback = document.getElementById("EmailFeedback");
-  const AgeFeedback = document.getElementById("AgeFeedback");
+  const stringAge = inputAge.value.trim(); // Pulisci gli spazi bianchi all'inizio e alla fine
+  const intAge = parseInt(stringAge);
+  const emailFeedback = document.getElementById("emailFeedback");
+  const ageFeedback = document.getElementById("ageFeedback");
 
-  if (IntAge <= 0 || IntAge >= 111) {
-    InputAge.classList.add("is-invalid");
-    AgeFeedback.innerText = "L'età deve essere tra 1 e 110 anni.";
-    AgeFeedback.classList.remove("d-none");
+  if (intAge <= 0 || intAge >= 111) {
+    inputAge.classList.add("is-invalid");
+    ageFeedback.innerText = "L'età deve essere tra 1 e 110 anni.";
+    ageFeedback.classList.remove("d-none");
   } else if (stringAge === "") {
-    InputAge.classList.add("is-invalid");
-    AgeFeedback.innerText = "Il campo età non può essere vuoto.";
-    AgeFeedback.classList.remove("d-none");
-  } else if (stringAge !== IntAge.toString()) {
-    InputAge.classList.add("is-invalid");
-    AgeFeedback.innerText = "Inserire un'età valida";
-    AgeFeedback.classList.remove("d-none");
+    inputAge.classList.add("is-invalid");
+    ageFeedback.innerText = "Il campo età non può essere vuoto.";
+    ageFeedback.classList.remove("d-none");
+  } else if (stringAge !== intAge.toString()) {
+    inputAge.classList.add("is-invalid");
+    ageFeedback.innerText = "Inserire un'età valida";
+    ageFeedback.classList.remove("d-none");
   } else {
-    InputAge.classList.remove("is-invalid");
-    InputAge.classList.add("is-valid");
-    AgeFeedback.classList.add("d-none");
+    inputAge.classList.remove("is-invalid");
+    inputAge.classList.add("is-valid");
+    ageFeedback.classList.add("d-none");
   }
 
   //Validazione Email
-  const Email = InputEmail.value;
+  const email = inputEmail.value;
 
-  if (Email.trim() === "") {
-    InputEmail.classList.add("is-invalid");
-    EmailFeedback.classList.remove("d-none");
-  } else if (!EmailValidation(Email)) {
-    InputEmail.classList.add("is-invalid");
-    EmailFeedback.classList.remove("d-none");
+  if (email.trim() === "") {
+    inputEmail.classList.add("is-invalid");
+    emailFeedback.classList.remove("d-none");
+  } else if (!emailValidation(email)) {
+    inputEmail.classList.add("is-invalid");
+    emailFeedback.classList.remove("d-none");
   } else {
-    InputEmail.classList.remove("is-invalid");
-    InputEmail.classList.add("is-valid");
-    EmailFeedback.classList.add("d-none");
+    inputEmail.classList.remove("is-invalid");
+    inputEmail.classList.add("is-valid");
+    emailFeedback.classList.add("d-none");
   }
 
-  // Calcolo se valido e express attivo
-  const IntKM = parseInt(inputKM.value);
-  const ExpressPrice = (IntKM * 0.35).toFixed(2);
-  const ExpressTwenty = (ExpressPrice * 0.8).toFixed(2);
-  const ExpressForty = (ExpressPrice * 0.6).toFixed(2);
-  const basePrice = (IntKM * 0.21).toFixed(2);
-  const baseTwenty = (basePrice * 0.8).toFixed(2);
-  const baseForty = (basePrice * 0.6).toFixed(2);
-  const AgeValid = InputAge.classList.contains("is-valid");
-  const EmailValid = InputEmail.classList.contains("is-valid");
-  const CheckoutText = document.getElementById("CheckoutText");
-
-  //Per questa const lo ammetto mi ha aiutato ChatGPT...
-  //non avevo idea di come aprire il modal solo in certe condizioni
+  // Imposto le variabili in utilizzo per la validazione dell'inpt
+  const intKM = parseInt(inputKM.value);
+  const ageValid = inputAge.classList.contains("is-valid");
+  const emailValid = inputEmail.classList.contains("is-valid");
+  const checkoutText = document.getElementById("checkoutText");
   const modal = new bootstrap.Modal(document.getElementById("Checkout"));
+  let expressValidData = ageValid && emailValid && expressCheckbox.checked;
+  let baseValidData = ageValid && emailValid;
 
-  if (AgeValid && EmailValid && ExpressCheckbox.checked && IntAge < 18) {
+  //Imposto la variabile message, imposto le variabili per i prezzi
+  let message = "";
+  const expressPrice = (intKM * 0.35);
+  const expressTwenty = (expressPrice * 0.8);
+  const expressForty = (expressPrice * 0.6);
+  const basePrice = (intKM * 0.21);
+  const baseTwenty = (basePrice * 0.8);
+  const baseForty = (basePrice * 0.6)
+
+
+
+  if (expressValidData && intAge < 18) {
+    message = `Grazie per aver scelto Express! Hai diritto ad uno sconto del 20%: il costo del biglietto sarà di ${expressTwenty.toFixed(2)}€ invece di ${expressPrice.toFixed(2)}€. Riceverai il biglietto digitale alla mail comunicata.`;
     modal.show();
-    CheckoutText.innerText = `Grazie per aver scelto Express! Hai diritto ad uno sconto del 20%: il costo del biglietto sarà di ${ExpressTwenty}€ invece di ${ExpressPrice}€. Riceverai il biglietto digitale alla mail comunicata.`;
-  } else if (AgeValid && EmailValid && ExpressCheckbox.checked && IntAge >= 65) {
+  }
+  else if (expressValidData && intAge >= 65) {
+    message = `Grazie per aver scelto Express! Hai diritto ad uno sconto del 40%: il costo del biglietto sarà di ${expressForty.toFixed(2)}€ invece di ${expressPrice.toFixed(2)}€. Riceverai il biglietto digitale alla mail comunicata.`;
     modal.show();
-    CheckoutText.innerText = `Grazie per aver scelto Express! Hai diritto ad uno sconto del 40%: il costo del biglietto sarà di ${ExpressForty}€ invece di ${ExpressPrice}€. Riceverai il biglietto digitale alla mail comunicata.`;
-  } else if (AgeValid && EmailValid && ExpressCheckbox.checked) {
+  }
+  else if (expressValidData) {
+    message = `Grazie per aver scelto Express! Il prezzo del biglietto sarà di ${expressPrice.toFixed(2)}€. Riceverai il biglietto digitale alla mail comunicata.`;
     modal.show();
-    CheckoutText.innerText = `Grazie per aver scelto Express! Il prezzo del biglietto sarà di ${ExpressPrice}€. Riceverai il biglietto digitale alla mail comunicata.`;
-  } else if (AgeValid && EmailValid && IntAge < 18) {
+  }
+  else if (baseValidData && intAge < 18) {
+    message = `Hai diritto ad uno sconto! Il costo del biglietto sarà di ${baseTwenty.toFixed(2)}€ invece che ${basePrice.toFixed(2)}€. Riceverai il biglietto alla mail comunicata.`;
     modal.show();
-    CheckoutText.innerText = `Hai diritto ad uno sconto! Il costo del biglietto sarà di ${baseTwenty}€ invece che ${basePrice}€. Riceverai il biglietto alla mail comunicata.`;
-  } else if (AgeValid && EmailValid && IntAge >= 65) {
+  }
+  else if (baseValidData && intAge >= 65) {
+    message = `Hai diritto ad uno sconto! Il costo del biglietto sarà di ${baseForty.toFixed(2)}€ invece che ${basePrice.toFixed(2)}€ Riceverai il biglietto alla mail comunicata.`;
     modal.show();
-    CheckoutText.innerText = `Hai diritto ad uno sconto! Il costo del biglietto sarà di ${baseForty}€ invece che ${basePrice}€ Riceverai il biglietto alla mail comunicata.`;
-  } else if (AgeValid && EmailValid) {
+  }
+  else if (baseValidData) {
+    message = `Il costo del biglietto sarà di ${basePrice.toFixed(2)}€. Riceverai il biglietto alla mail comunicata.`;
     modal.show();
-    CheckoutText.innerText = `Il costo del biglietto sarà di ${basePrice}€. Riceverai il biglietto alla mail comunicata.`;
+  }
+    if (message) {
+    checkoutText.innerText = message;
+    modal.show();
   }
 })
+

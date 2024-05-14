@@ -24,7 +24,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <p id="CheckoutText"></p>
+              <p id="checkoutText"></p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-success" data-bs-dismiss="modal">Chiudi</button>
@@ -44,18 +44,18 @@
           <form class="w-100 w-md-50 w-lg-25" id="ticket-form">
             <div class="d-flex flex-column gap-3 justify-content-center mb-4 mb-lg-5">
               <label for="email">Inserisci la tua mail</label>
-              <input type="email" class="rounded-3 border-0 form-control" placeholder="test@gmail.com" id="InputEmail" />
-              <div class="invalid-feedback d-none" id="EmailFeedback">Inserisci un email valida</div>
+              <input type="email" class="rounded-3 border-0 form-control" placeholder="test@gmail.com" id="inputEmail" />
+              <div class="invalid-feedback d-none" id="emailFeedback">Inserisci un email valida</div>
               <label for="Eta">Inserisci la tua Età</label>
-              <input type="number" class="rounded-3 border-0 form-control" placeholder="25" id="InputAge" />
-              <div class="invalid-feedback d-none" id="AgeFeedback">Inserisci un età valida (Età massima : 110)</div>
+              <input type="number" class="rounded-3 border-0 form-control" placeholder="25" id="inputAge" />
+              <div class="invalid-feedback d-none" id="ageFeedback">Inserisci un età valida (Età massima : 110)</div>
             </div>
             <!-- KM FORM -->
             <div class="km-range">
               <label for="km-range">Quanti KM desideri percorrere:</label>
-              <span id="current_km"></span>
+              <span id="currentKM"></span>
               <input type="range" value="5" min="5" max="200" step="5" class="form-range" id="input-km" />
-              <span class="fw-light text-warning d-none" id="ExpressInfo">*Fino a 500km!*</span>
+              <span class="fw-light text-warning d-none" id="expressInfo">*Fino a 500km!*</span>
               <div class="d-flex flex-column mt-3 small-xs mt-lg-5">
                 <!-- EXPRESS -->
                 <h2>Pronto a spingerti più lontano?</h2>
@@ -68,7 +68,7 @@
                   *il costo del biglietto aumenta a 0.35 cent per km*
                 </p>
                 <div class="express-setup mt-3 mt-lg-4">
-                  <input type="checkbox" id="ExpressCheckbox" class="bigger-checkbox" />
+                  <input type="checkbox" id="expressCheckbox" class="bigger-checkbox" />
                   <label for="express" class="checkbox-label">Attiva Express</label>
                 </div>
               </div>
