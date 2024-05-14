@@ -22,7 +22,7 @@ inputKM.addEventListener('input', function () {
   currentKM.innerText = inputKM.value
 })
 
-//Logica Express Setup
+//Se Express Checkbox is Checked
 const expressCheckbox = document.getElementById('expressCheckbox')
 const expressInfo = document.getElementById('expressInfo')
 
@@ -49,20 +49,19 @@ expressCheckbox.addEventListener('change', function () {
   }
 })
 
-//Validazione Input
-
-//La regex non è assolutamente scritta da me, però funziona!
+//Regex validazione email
 function emailValidation(email) {
   const regex = /^[^\s@]+@[^\s@]+\.(it|com|net|org|edu)$/
   return regex.test(email)
 }
 
+//Valido Age e Email al click di submit, restituisco output
 submit.addEventListener('click', function () {
   inputAge.classList.remove("is-valid", "is-invalid");
   inputEmail.classList.remove("is-valid", "is-invalid");
 
   // Validazione Age
-  const stringAge = inputAge.value.trim(); // Pulisci gli spazi bianchi all'inizio e alla fine
+  const stringAge = inputAge.value.trim();
   const intAge = parseInt(stringAge);
   const emailFeedback = document.getElementById("emailFeedback");
   const ageFeedback = document.getElementById("ageFeedback");
@@ -100,7 +99,7 @@ submit.addEventListener('click', function () {
     emailFeedback.classList.add("d-none");
   }
 
-  // Imposto le variabili in utilizzo per la validazione dell'inpt
+  // Imposto le variabili in utilizzo per la validazione dell'input
   const intKM = parseInt(inputKM.value);
   const ageValid = inputAge.classList.contains("is-valid");
   const emailValid = inputEmail.classList.contains("is-valid");
@@ -119,30 +118,23 @@ submit.addEventListener('click', function () {
   const baseForty = (basePrice * 0.6)
 
 
-
   if (expressValidData && intAge < 18) {
     message = `Grazie per aver scelto Express! Hai diritto ad uno sconto del 20%: il costo del biglietto sarà di ${expressTwenty.toFixed(2)}€ invece di ${expressPrice.toFixed(2)}€. Riceverai il biglietto digitale alla mail comunicata.`;
-    modal.show();
   }
   else if (expressValidData && intAge >= 65) {
     message = `Grazie per aver scelto Express! Hai diritto ad uno sconto del 40%: il costo del biglietto sarà di ${expressForty.toFixed(2)}€ invece di ${expressPrice.toFixed(2)}€. Riceverai il biglietto digitale alla mail comunicata.`;
-    modal.show();
   }
   else if (expressValidData) {
     message = `Grazie per aver scelto Express! Il prezzo del biglietto sarà di ${expressPrice.toFixed(2)}€. Riceverai il biglietto digitale alla mail comunicata.`;
-    modal.show();
   }
   else if (baseValidData && intAge < 18) {
     message = `Hai diritto ad uno sconto! Il costo del biglietto sarà di ${baseTwenty.toFixed(2)}€ invece che ${basePrice.toFixed(2)}€. Riceverai il biglietto alla mail comunicata.`;
-    modal.show();
   }
   else if (baseValidData && intAge >= 65) {
     message = `Hai diritto ad uno sconto! Il costo del biglietto sarà di ${baseForty.toFixed(2)}€ invece che ${basePrice.toFixed(2)}€ Riceverai il biglietto alla mail comunicata.`;
-    modal.show();
   }
   else if (baseValidData) {
     message = `Il costo del biglietto sarà di ${basePrice.toFixed(2)}€. Riceverai il biglietto alla mail comunicata.`;
-    modal.show();
   }
     if (message) {
     checkoutText.innerText = message;
